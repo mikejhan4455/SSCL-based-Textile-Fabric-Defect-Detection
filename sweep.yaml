@@ -1,0 +1,39 @@
+program: tuning.py
+method: random
+metric:
+  goal: minimize
+  name: loss
+name: sweep
+parameters:
+  argumented:
+    values:
+      - true
+      - false
+  dataset:
+    values:
+      - normal
+      - error
+      - mixed
+  encoder_model:
+    values:
+      - ViT-B_16
+  epochs:
+    values:
+      - 400
+      - 800
+  lr:
+    values:
+      - 0.001
+      - 0.0001
+      - 1e-05
+  method:
+    values:
+      - regular
+      - pixpro
+  optimizer:
+    values:
+      - SGD
+  pretrained:
+    values:
+      - true
+      - false
