@@ -16,12 +16,11 @@
 
 ## 🧐 About <a name = "about"></a>
 
-continue writing after in english: The project "Research of Self-Supervised Contrastive Learning-based Textile Fabric Defect"(SSCL-based Textile Fabric Defect Detection) is my graduation project.
+The project "Research of Self-Supervised Contrastive Learning-based Textile Fabric Defect"(SSCL-based Textile Fabric Defect Detection) is my graduation project.
 
 The codes are mainly implemented in Python and PyTorch framework. The goal of the project is to develop an efficient and accurate defect detection system for textile fabrics using self-supervised contrastive learning.
 
 The project will provide the model and framework ONLY for designing and training the SSCL-based detection model, and evaluating the model's performance. Please prepare your own dataset. 
-
 
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
