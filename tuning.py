@@ -4,9 +4,11 @@
 # https://pypi.org/project/vision-transformer-pytorch/
 
 import gc
+from logging import raiseExceptions
 import math
 import os
 import sys
+import yaml
 
 import cv2
 import matplotlib
@@ -36,34 +38,7 @@ if device != torch.device("cuda"):
 
 WANDB_PROJECT = "vision-trasnformer-ablation-2023-06-14"
 ROOT_PATH = "/workspace/persistent/Projects/little-batch-evauation/"
-# METHOD = "pixpro"  # "regular"
-# METHOD = "regular"
-# ENCODER_MODEL = "ViT-B_16"
-# EPOCH = 1000
-# # LR = 1.0
-# LR = 0.0001
-# # BATCH_SIZE = 2
-# BATCH_SIZE = 16
 PRETRAINED = True
-# DATASET = "normal"  # 'error' 'mixed'
-
-# Define sweep config
-sweep_configuration = {
-    "method": "random",
-    "name": "sweep",
-    "metric": {"goal": "minimize", "name": "loss"},
-    "parameters": {
-        "encoder_model": {"values": ["ViT-B_16"]},
-        "optimizer": {"values": ["SGD"]},
-        # "lr": {"values": [1, 0.1, 0.01, 0.001, 0.0001]},
-        "lr": {"values": [0.001, 0.0001, 0.00001]},
-        "epochs": {"values": [200]},
-        "method": {"values": ["regular", "pixpro"]},
-        "dataset": {"values": ["normal", "error", "mixed"]},
-        "pretrained": {"values": [True, False]},
-        "argumented": {"values": [True, False]},
-    },
-}
 
 
 def get_experience_name(params=None):
@@ -495,9 +470,16 @@ def train():
                 ),
             )
 
+
 def main():
     if not os.path.exists("sweep_id"):
-        sweep_id = wandb.sweep(sweep=sweep_configuration, project=WANDB_PROJECT)
+        if os.path.exists("sweep.yaml"):
+            with open("sweep.yaml") as f:
+                sweep_config = yaml.load(f, Loader=yaml.FullLoader)
+                sweep_id = wandb.sweep(sweep=sweep_config, project=WANDB_PROJECT)
+
+        else:
+            raise Exception("sweep.yaml not found")
 
         # save sweep_id to file
         with open("sweep_id", "w") as f:
