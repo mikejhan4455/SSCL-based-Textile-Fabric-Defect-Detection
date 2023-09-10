@@ -1,53 +1,60 @@
-<h3 align="center">基於自監督對比學習的紡織布料瑕疵研究</h3>
+
+<h3 align="center">Research of Self-Supervised Contrastive Learning-based Textile Fabric Defect</h3>
 
 ---
 
-<p align="center"> 基於神經網路的紡織布料瑕疵快速檢測
+<p align="center"> 基於神經網路紡織布料瑕疵快速偵測
     <br> 
 </p>
 
-## 📝 目錄
+## 📝 Table of Contents
 
-- [關於](#about)
-- [入門](#getting_started)
-- [作者](#authors)
-- [致謝](#acknowledgement)
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Authors](#authors)
+- [Acknowledgments](#acknowledgement)
 
-## 🧐 關於 <a name = "about"></a>
+## 🧐 About <a name = "about"></a>
 
-項目 "基於自監督對比學習的紡織布料瑕疵研究" 是我的畢業項目。
+The project "Research of Self-Supervised Contrastive Learning-based Textile Fabric Defect"(SSCL-based Textile Fabric Defect Detection) is my graduation project.
 
-代碼主要是使用 Python 和 PyTorch 框架實現的。該項目的目標是使用自監督對比學習開發一個高效準確的紡織布料瑕疵檢測系統。
+The codes are mainly implemented in Python and PyTorch framework. The goal of the project is to develop an efficient and accurate defect detection system for textile fabrics using self-supervised contrastive learning.
 
-該項目僅提供用於設計和訓練SSCL基檢測模型以及評估模型性能的模型和框架。請自行準備您自己的數據集。
+The project will provide the model and framework ONLY for designing and training the SSCL-based detection model, and evaluating the model's performance. Please prepare your own dataset. 
 
-## 🏁 入門 <a name = "getting_started"></a>
 
-### 安裝
-以下是運行和實驗您的圖像數據集所需遵循的步驟：
+## 🏁 Getting Started <a name = "getting_started"></a>
 
-1. 準備您的圖像數據集以供使用。
-2. 在您的計算機上安裝 'conda'。
-3. 打開終端並運行命令 ```conda env create -f environment.yml```。
-4. 如果您想要查看注意力圖，請按照以下步驟操作：
-   - 在終端上運行命令 ```pip show vision_transformer_pytorch```。
-   - 'cd' 到該包的位置。
-   - 將 'model.py' 文件替換為 'model/model.py'。
-5. 要記錄實驗數據，您可以使用 'w&b' 服務。首先運行命令 ```wandb login``` 登錄。
-6. 創建一個項目和相應的sweep。然後將sweep id保存到名為 "sweep_id" 的文件中，放在根目錄中。如果不這樣做，系統將自動創建一個。
 
-### 運行
-運行模型訓練的主要檔案是 'tuning.py'
-要在後台自動運行實驗，請在終端上運行命令 ```nohup python tuning.py &```。要查看結果，使用終端上的命令 ```tail -f nohup.out```，或在 wandb sweep 頁面上查看結果。
 
-## ✍️ 作者 <a name = "authors"></a>
+### Installing
+Here are the steps to be followed to run and experiment on your image dataset:
 
-- 陳建彰 教授 - 淡江大學
-- [@Chris Zhan](https://github.com/mikejhan4455) - 項目研究生
+1. Prepare your image dataset for use.
+2. Install 'conda' on your computer.
+3. Open your terminal and run the command ```conda env create -f environment.yml```.
+4. If you want to see the Attention maps, follow these steps: 
+   - Run the command ```pip show vision_transformer_pytorch``` on your terminal.
+   - Navigate to the location of the package.
+   - Replace the 'model.py' file with 'model/model.py'.
+5. To log experiment data, you can use the 'w&b' service. Login with the command ```wandb login``` first.
+6. Create a project and corresponding sweep. Then save the sweep id into a file named "sweep_id" in the root folder. If you don't, the system will create one automatically.
 
-## 🎉 致謝 <a name = "acknowledgement"></a>
 
-- 參考文獻
+### Running
+The main enterypoint is tuning.py
+To run the experiment automatically in the background, run the command ```nohup python tuning.py &``` on your terminal. To see the results, use the command ```tail -f nohup.out``` on your terminal or view them on the wandb sweep page.
+
+
+## ✍️ Author <a name = "authors"></a>
+
+- Dr, Chieh Chang Chen - Tamkang University
+- [@Chris Zhan](https://github.com/mikejhan4455) - Project Student
+
+
+## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+
+- References
   - [1] 王靖壹. 以深度學習為基礎之紡織布料瑕疵偵測. 淡江大學資訊工程學系碩士論文., 2021.
   - [2] 魏嘉弘. 基於神經網路紡織布料瑕疵快速偵測. 淡江大學資訊工程學系碩士論文., 2022.
   - [3] Guanghua Hu, Junfeng Huang, Qinghui Wang, Jingrong Li, Zhijia Xu, and Xingbiao Huang. Unsupervised fabric defect detection based on a deep convolutional generative adversarial network. Textile Research Journal, 90(3-4):247–270, February 2020.
@@ -70,4 +77,3 @@
   - [19] Lovedeep Gondara. Medical image denoising using convolutional denoising autoencoders. In 2016 IEEE 16th International Conference on Data Mining Workshops (ICDMW), pages 241–246, December 2016.
   - [20] Zhenda Xie, Yutong Lin, Zheng Zhang, Yue Cao, Stephen Lin, and Han Hu. Propagate Yourself: Exploring Pixel-Level Consistency for Unsupervised Visual Representation Learning. In 2021 IEEE/CVF Conference on Computer Vision and 39 Pattern Recognition (CVPR), pages 16679–16688, Nashville, TN, USA, June 2021. IEEE.
   - [21] Tal Reiss, Niv Cohen, Liron Bergman, and Yedid Hoshen. PANDA: Adapting Pretrained Features for Anomaly Detection and Segmentation. In 2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pages 2805–2813. IEEE Computer Society, June 2021.
-
