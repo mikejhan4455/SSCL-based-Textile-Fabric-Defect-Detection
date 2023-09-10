@@ -11,20 +11,19 @@ parameters:
       - false
   dataset:
     values:
-      - normal
-      - error
-      - mixed
+      - anomaly
   encoder_model:
     values:
       - ViT-B_16
   epochs:
     values:
-      - 400
-      - 800
+      - 100
+      # - 400
+      # - 800
   lr:
     values:
-      - 0.001
-      - 0.0001
+      - 1e-03
+      - 1e-04
       - 1e-05
   method:
     values:

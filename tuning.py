@@ -26,9 +26,9 @@ from tqdm import tqdm
 from vision_transformer_pytorch import VisionTransformer
 import wandb
 
-sys.path.append("/workspace/persistent/Projects/CutPaste")
+sys.path.append("pytorch-cutpaste/")
 
-from dataset import NormalDataset
+from dataset import NormalDataset, AnomalyDataset
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -51,13 +51,6 @@ def get_experience_name(params=None):
 
 
 def get_dataset():
-    # err_image_dataset = PatchedNormalDataset(
-    #     "/workspace/persistent/Datasets/50_600x600_err-image",
-    #     patch_size=384,
-    #     stride=216,
-    #     extra_transform=get_transform(),
-    #     labled=False,
-    # )
 
     err_image_dataset = NormalDataset(
         "/workspace/persistent/Datasets/50_600x600_err-image",
@@ -71,16 +64,25 @@ def get_dataset():
         labled=False,
     )
 
+    anomaly_image_dataset = AnomalyDataset(
+        "/workspace/persistent/Datasets/captured_pic",
+        extra_transform=get_transform(),
+        labled=False,
+    )
+
     if wandb.config.dataset == "normal":
         return fabric_image_dataset
     elif wandb.config.dataset == "error":
         return err_image_dataset
     elif wandb.config.dataset == "mixed":
         return ConcatDataset([err_image_dataset, fabric_image_dataset])
+    elif wandb.config.dataset == "anomaly":
+        return ConcatDataset([fabric_image_dataset, anomaly_image_dataset])
 
 
 def get_transform(param=None):
-    param = wandb.config if param is None else param
+    if param is None:
+        param = wandb.config
 
     if param.argumented == "True":
         # with argument
@@ -182,11 +184,14 @@ def get_lr_scheduler(optimizer):
     return scheduler
 
 
-def get_attention_map(model, img, get_mask=False, param=None):
+def get_attention_map(model, img, get_mask=False, param=None, get_transform=get_transform):
     """
     Get the attention map of the input image
     """
-    transform = get_transform(param)
+    if param:
+        transform = get_transform(param)
+    else:
+        transform = get_transform()
     x = transform(img)
     # x.size()
 
@@ -224,7 +229,9 @@ def get_attention_map(model, img, get_mask=False, param=None):
         mask = cv2.resize(mask / mask.max(), img.size)[..., np.newaxis]
 
         # reshape
-        result = (mask * img).astype("uint8")
+        # result = (mask * img).astype("uint8")
+        # TEMP
+        result = mask
 
     return result
 
